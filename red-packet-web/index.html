@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="zh-Hans">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>点开红包</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+    <div class="container">
+        <div id="envelope" class="envelope">
+            <div class="flap"></div>
+            <div class="body"></div>
+        </div>
+        <button id="openBtn" class="open-btn">点开红包</button>
+    </div>
+
+    <div id="modal" class="modal hidden">
+        <div class="modal-content">
+            <h1>恭喜抽中 <span class="prize">RM10</span></h1>
+            <p class="congrats">祝你新年快乐，财源滚滚来！</p>
+
+            <form id="entryForm">
+                <label>姓名<br><input name="name" id="name" required></label>
+                <label>电话<br><input name="phone" id="phone" required></label>
+                <div class="actions">
+                    <button type="submit">提交领取信息</button>
+                </div>
+            </form>
+
+            <div id="status" class="status"></div>
+            <button id="closeBtn" class="close-btn">关闭</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
