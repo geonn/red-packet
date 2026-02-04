@@ -22,9 +22,17 @@ module.exports = async (req, res) => {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(payload)
         });
-        const data = await r.json();
-        return res.status(r.ok ? 200 : 502).json(data);
+        const text = await r.text();
+        let data = null;
+        try { data = JSON.parse(text); } catch (e) { /* not JSON */ }
+        if (r.ok) {
+            if (data) return res.status(200).json(data);
+            return res.status(200).json({ ok: true, message: 'Upstream returned non-JSON response', body: text.slice(0, 100) });
+        }
+        console.error('Upstream error', r.status, text);
+        return res.status(502).json({ error: 'Upstream error', status: r.status, body: text });
     } catch (err) {
+        console.error('Proxy error', err);
         return res.status(500).json({ error: err.message });
     }
 };
